@@ -24,17 +24,14 @@ data "aws_ami" "distro" {
   most_recent = true
 
   filter {
-    name   = "name"
-    values = ["CoreOS-stable-*"]
-  }
+    name = "name"
+    values = ["Kubespray AMI Builder*"] }
 
   filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
+    name = "virtualization-type"
+    values = ["hvm"] }
 
-  owners = ["595879546273"] #CoreOS
-}
+owners = ["173865040391"] }
 
 //AWS VPC Variables
 
