@@ -1,0 +1,9 @@
+---
+- hosts: default
+  become: yes
+  roles:
+    - { role: kubespray-defaults }
+    - { role: bootstrap-os, tags: bootstrap-os}
+    - { role: kubernetes/preinstall, tags: preinstall }
+    - { role: "container-engine", tags: "container-engine", when: deploy_container_engine|default(true) }
+    - { role: download, tags: download, when: "not skip_downloads" }
