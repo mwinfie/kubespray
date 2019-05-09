@@ -25,7 +25,7 @@ data "aws_ami" "distro" {
 
   filter {
     name = "name"
-    values = ["Kubespray AMI Builder*"] }
+    values = ["Kubespray Image*"] }
 
   filter {
     name = "virtualization-type"
