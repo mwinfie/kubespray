@@ -1,0 +1,40 @@
+{
+    "variables": {
+        "aws_access_key": "",
+        "aws_secret_key": ""
+    },
+
+    "provisioners": [
+        {
+            "type": "shell",
+            "inline": ["sudo yum makecache fast;sudo yum update -y"]
+        },
+        {
+            "type": "ansible",
+            "user": "centos",
+            "groups": ["kube-node", "kube-master", "etcd", "k8s-cluster"],
+            "playbook_file": "./packer-aws-ami.yml"
+        }
+    ],
+
+    "builders": [
+        {
+        "type": "amazon-ebs",
+        "access_key": "{{user `aws_access_key`}}",
+        "secret_key": "{{user `aws_secret_key`}}",
+        "region": "us-west-1",
+        "source_ami_filter": {
+            "filters": {
+                "virtualization-type": "hvm",
+                "name": "dcos-centos7-*"
+
+            },
+            "owners": ["688023202711"],
+            "most_recent": true
+        },
+        "instance_type": "t2.small",
+        "ssh_username": "centos",
+        "ami_name": "Kubespray AMI Builder {{timestamp}}"
+        }
+    ]
+}
