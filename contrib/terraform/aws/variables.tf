@@ -29,7 +29,8 @@ data "aws_ami" "distro" {
 
   filter {
     name = "virtualization-type"
-    values = ["hvm"] }
+    values = ["hvm"]
+  }
 
 owners = ["173865040391"] }
 
